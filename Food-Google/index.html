@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Ask AI • Food Q&A</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css">
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <main class="wrap">
+    <div class="card">
+      <h1>Ask our AI about food & ingredients (currently not finished)</h1>
+      <p class="sub">Examples: “Is there gluten in pizza?” “Is almond milk dairy-free?”</p>
+
+    <div style="text-align:right; margin: 10px;">
+      <a href="../app.html" class="back-to-home-btn">Back to main page</a>
+    </div>
+
+
+      <form id="askForm">
+        <label for="question">Your question</label>
+        <textarea id="question" placeholder="Type your question here..." required></textarea>
+        <div class="actions">
+          <button type="submit" class="btn btn-primary">Ask</button>
+          <button type="button" id="clearBtn" class="btn btn-ghost">Clear</button>
+        </div>
+      </form>
+
+      <div id="status" class="status" aria-live="polite"></div>
+
+      <section id="answerBox" class="answer-box" hidden>
+        <h2>Answer</h2>
+        <div id="answer"></div>
+        <hr>
+        <details>
+          <summary>What context was used?</summary>
+          <pre id="ctx"></pre>
+        </details>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

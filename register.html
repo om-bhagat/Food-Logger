@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Sign in — Food Logger</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="data:," />
+  <style>
+    :root{ --bg:#0b0c10; --card:#12151a; --muted:#98a2b3; --text:#e5e7eb; }
+    body{ margin:0; min-height:100vh; display:grid; place-items:center; background:var(--bg); color:var(--text);
+      font-family: ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial }
+    .card{ background:#12151a; padding:24px; border-radius:16px; width:min(420px,92vw);
+      border:1px solid rgba(255,255,255,.08); box-shadow:0 8px 32px rgba(0,0,0,.2); text-align:center }
+    button{ padding:10px 14px; border:none; border-radius:12px; background:#fff; color:#000; cursor:pointer }
+    .muted{ color:#98a2b3; margin-top:10px }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1>Food Logger</h1>
+    <p class="muted">Sign in with your Google account to sync across devices.</p>
+    <button id="google">Continue with Google</button>
+    <p id="status" class="muted"></p>
+  </main>
+
+  <script type="module">
+    import { signInWithGoogle, signInWithRedirectSafe, waitForUser } from "./auth.js";
+
+    const statusEl = document.getElementById("status");
+    const setStatus = (m) => statusEl.textContent = m || "";
+
+    document.getElementById("google").addEventListener("click", async () => {
+      setStatus("Opening Google…");
+      try {
+        await signInWithGoogle();            // popup
+        window.location.href = "index.html";
+      } catch {
+        setStatus("Popup blocked. Redirecting…");
+        await signInWithRedirectSafe();      // redirect
+      }
+    });
+
+    const u = await waitForUser();
+    if (u) window.location.href = "app.html";
+  </script>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Food and Outcome Log</title>
+  <link rel="icon" href="data:," />
+  <link rel="stylesheet" href="./style.css" />
+  <script type="module" src="./main.js"></script>
+  <script defer src="./script.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Food & Outcome Log</h1>
+      <div class="row" role="group" aria-label="global actions">
+        <span id="who" class="muted" style="margin-right:8px;"></span>
+        <button class="btn ghost" id="btn-export-json" title="Export to JSON">Export JSON</button>
+        <button class="btn ghost" id="btn-export-csv" title="Export to CSV">Export CSV</button>
+        <label class="btn ghost" for="file-import" title="Import from JSON">Import</label>
+        <input id="file-import" type="file" accept="application/json" class="sr" />
+        <button class="btn warn" id="btn-logout" title="Log out">Log out</button>
+        <a class="btn ghost" href="motivation-page/index.html" title="Why I built this">Why I built this</a>
+      </div>
+    </header>
+    <!-- Ask AI Button -->
+    <div style="text-align:right; margin: 10px;">
+      <a href="Food-Google/index.html" class="ask-ai-btn">Ask AI</a>
+    </div>
+
+    <p class="muted" style="margin:.3rem 0 1rem">
+      Record what you ate, how it felt, and its ingredients. Data is stored locally.
+      Press <span class="kbd">Ctrl / Cmd</span> + <span class="kbd">Enter</span> to save.
+    </p>
+
+    <section class="grid">
+      <!-- Form -->
+      <form id="entry-form" class="card" autocomplete="off">
+        <h2 class="h2">Add / Edit Entry</h2>
+        <input type="hidden" id="id" />
+
+        <div class="row">
+          <div style="flex:1">
+            <label for="food">Food or Meal</label>
+            <input id="food" name="food" type="text" placeholder="e.g., Pizza, Paneer wrap, Coffee…" required />
+          </div>
+          <div>
+            <label for="when">When</label>
+            <input id="when" name="when" type="datetime-local" />
+          </div>
+        </div>
+
+        <div>
+          <label>Outcome</label>
+          <div class="seg" role="radiogroup" aria-label="Outcome">
+            <input id="o-great" type="radio" name="outcome" value="great" />
+            <label class="chip" data-val="great" for="o-great">Great</label>
+
+            <input id="o-meh" type="radio" name="outcome" value="meh" />
+            <label class="chip" data-val="meh" for="o-meh">Normal</label>
+
+            <input id="o-bad" type="radio" name="outcome" value="bad" />
+            <label class="chip" data-val="bad" for="o-bad">Not great</label>
+          </div>
+        </div>
+
+        <div>
+          <label for="notes">Notes / Symptoms (optional)</label>
+          <textarea id="notes" name="notes" placeholder="Any reactions, energy, digestion, mood…"></textarea>
+        </div>
+
+        <!-- INGREDIENTS directly below notes/symptoms -->
+        <div class="hr"></div>
+        <h3 class="h3">Serving Size of the meal</h3>
+        <div class="muted" style="margin-bottom:8px">
+          Add how much you had (e.g., “Rice”, qty “1.5”, unit “cups”)
+        </div>
+
+        <div class="ing-add">
+          <input id="ing-name" type="text" placeholder="Item (e.g., Rice, Pizza slice)" />
+          <input id="ing-qty"  type="text" placeholder="Qty (e.g., 1, 1.5)" />
+          <input id="ing-unit" type="text" placeholder="Unit (e.g., cups, g, slices)" />
+          <button type="button" class="btn" id="btn-ing-add" title="Add ingredient">Add</button>
+          <button type="button" class="btn ghost" id="btn-ing-clear" title="Clear all ingredients">Clear all</button>
+        </div>
+
+        <table class="table" id="ing-table" aria-label="Servings">
+          <thead>
+            <tr>
+              <th style="width:50%">Item</th>
+              <th style="width:20%">Qty</th>
+              <th style="width:20%">Unit</th>
+              <th style="width:10%"></th>
+            </tr>
+          </thead>
+          <tbody id="ing-tbody"></tbody>
+        </table>
+
+        <div class="row" style="justify-content:space-between; margin-top:10px">
+          <div class="row">
+            <button type="submit" class="btn primary" id="btn-save">Save</button>
+            <button type="button" class="btn" id="btn-clear">Clear</button>
+            <button type="button" class="btn" id="btn-last">Same as last</button>
+          </div>
+          <div class="row">
+            <button type="button" class="btn warn" id="btn-nuke" title="Delete all entries">Delete All</button>
+          </div>
+        </div>
+      </form>
+
+      <!-- List + Filters -->
+      <div class="card">
+        <h2 class="h2">Search & Filter</h2>
+        <div class="row">
+          <input id="q" type="text" placeholder="Search food, notes, or ingredients…" />
+          <select id="f-outcome" class="btn" style="padding:10px 12px">
+            <option value="">All outcomes</option>
+            <option value="great">Great 👍</option>
+            <option value="meh">Meh 😐</option>
+            <option value="bad">Not great 👎</option>
+          </select>
+          <select id="f-range" class="btn" style="padding:10px 12px">
+            <option value="7">Last 7 days</option>
+            <option value="30" selected>Last 30 days</option>
+            <option value="90">Last 90 days</option>
+            <option value="365">Last year</option>
+            <option value="all">All time</option>
+          </select>
+        </div>
+
+        <div class="hr"></div>
+
+        <div class="row" style="justify-content:space-between; align-items:center">
+          <div class="muted" id="count"></div>
+          <div class="row">
+            <button class="btn" id="btn-sort" type="button">Sort: New → Old</button>
+            <button class="btn" id="btn-share" type="button">Share last</button>
+          </div>
+        </div>
+
+        <div class="list" id="list" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top:14px">
+      <h2 class="h2">Quick Stats</h2>
+      <table class="table" id="stats">
+        <thead>
+          <tr><th>Window</th><th>Total</th><th>Great</th><th>Meh</th><th>Not great</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <footer class="muted" style="margin:18px 4px; font-size:.85rem">
+      Your data stays in your browser (localStorage). Export JSON/CSV for backups.
+    </footer>
+  </div>
+</body>
+</html>

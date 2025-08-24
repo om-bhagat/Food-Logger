@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Diet Questionnaire</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <main class="wrap">
+    <div class="progress" aria-hidden="true"><span></span></div>
+    <div class="card">
+      <h1>Tell us about your diet</h1>
+      <p class="sub">This helps personalize your food log and suggestions. Takes ~30 seconds.</p>
+
+      <form id="questionnaireForm" novalidate>
+        <!-- Allergies -->
+        <div class="row">
+          <label for="allergies">Do you have any food allergies?</label>
+          <textarea id="allergies" name="allergies" placeholder="e.g., peanuts; lactose" required></textarea>
+        </div>
+
+        <!-- Consent -->
+        <div class="row fieldset">
+          <span class="legend">Do you allow us to use your data for predictive modeling?</span>
+          <div class="radios" role="radiogroup" aria-label="AI training consent">
+            <label class="radio">
+              <input type="radio" name="consent" value="yes" checked>
+              <span>Yes</span>
+            </label>
+            <label class="radio">
+              <input type="radio" name="consent" value="no">
+              <span>No</span>
+            </label>
+            <label class="radio">
+              <input type="radio" name="consent" value="custom">
+              <span>Choose what to share</span>
+            </label>
+          </div>
+
+          <div id="customBlock" class="custom-consent">
+            <div class="hint" style="margin:6px 0 8px">Select the items you’re comfortable sharing:</div>
+            <div class="checks">
+              <label><input type="checkbox" name="share_food" checked> Food names</label>
+              <label><input type="checkbox" name="share_time" checked> Time entries</label>
+              <label><input type="checkbox" name="share_outcome"> Outcome ratings</label>
+              <label><input type="checkbox" name="share_notes"> Notes (free text)</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-primary" type="submit">Continue</button>
+        </div>
+        <div class="footnote">We never sell your data. You can change consent anytime in Settings.</div>
+      </form>
+    </div>
+  </main>
+</body>
+</html>

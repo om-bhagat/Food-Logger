@@ -1,0 +1,124 @@
+:root{
+  --bg:#0b0c10; --bg-soft:#0f1117; --card:#12151a;
+  --text:#e5e7eb; --muted:#9aa3af; --ring:#60a5fa;
+  --brand:#22c55e; --brand-ink:#052e1b;
+  --ok:#22c55e; --meh:#f59e0b; --bad:#ef4444;
+}
+@media (prefers-color-scheme: light){
+  :root{
+    --bg:#f7f7f8; --bg-soft:#ffffff; --card:#ffffff;
+    --text:#0f172a; --muted:#5b6474; --ring:#2563eb;
+    --brand:#16a34a; --brand-ink:#062d1a;
+  }
+}
+
+*{ box-sizing:border-box }
+html,body{ height:100% }
+body{
+  margin:0; color:var(--text);
+  background:linear-gradient(180deg,var(--bg) 0%,var(--bg-soft) 100%);
+  font:16px/1.65 ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+       Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+}
+.wrap{ width:min(980px,92vw); margin-inline:auto }
+
+.skip{ position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden }
+.skip:focus{ left:16px; top:12px; width:auto; height:auto; background:#000; color:#fff; padding:8px 10px; border-radius:8px }
+
+.hero{
+  border-bottom:1px solid rgba(255,255,255,.08);
+  background:
+    radial-gradient(900px 360px at 10% -10%, rgba(34,197,94,.22), transparent 60%),
+    radial-gradient(800px 320px at 90% -20%, rgba(96,165,250,.22), transparent 60%),
+    linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,0));
+}
+.hero .wrap{ padding:60px 0 44px }
+h1{ margin:0 0 8px; font-size:clamp(1.6rem,3.2vw,2.3rem); letter-spacing:.3px }
+.subtitle{ margin:0 0 14px; color:var(--muted) }
+.badges{ display:flex; gap:8px; flex-wrap:wrap; margin:10px 0 18px }
+.badge{
+  font-size:.85rem; padding:6px 10px; border-radius:999px;
+  border:1px solid rgba(255,255,255,.14);
+  background:rgba(255,255,255,.04)
+}
+
+.btn{
+  display:inline-block; padding:10px 14px; border-radius:12px;
+  background:var(--brand); color:var(--brand-ink);
+  font-weight:700; text-decoration:none; border:0; cursor:pointer;
+  box-shadow:0 6px 18px rgba(34,197,94,.24);
+  transition:transform .1s, box-shadow .2s, background .2s;
+}
+.btn:hover{ transform:translateY(-1px); box-shadow:0 10px 24px rgba(34,197,94,.28) }
+.btn:active{ transform:translateY(0) }
+.btn.ghost{
+  background:transparent; color:var(--text);
+  border:1px dashed rgba(255,255,255,.18); box-shadow:none;
+}
+
+.layout{ display:grid; grid-template-columns:260px 1fr; gap:24px; padding:28px 0 40px }
+@media (max-width:900px){ .layout{ grid-template-columns:1fr } }
+
+.toc{
+  position:sticky; top:16px; align-self:start;
+  background:var(--card); padding:16px; border-radius:14px;
+  border:1px solid rgba(255,255,255,.08)
+}
+.toc h2{ margin:0 0 8px; font-size:1rem }
+.toc ol{ margin:0; padding-left:18px }
+.toc a{ color:inherit; text-decoration:none }
+.toc a:hover{ color:var(--brand) }
+
+.prose{
+  background:var(--card); padding:22px; border-radius:16px;
+  border:1px solid rgba(255,255,255,.08);
+  box-shadow:0 12px 40px rgba(0,0,0,.18)
+}
+.prose h2{ margin:1.1rem 0 .5rem; font-size:clamp(1.15rem,2.4vw,1.35rem) }
+.prose p{ margin:.6rem 0 }
+.lede{
+  border-left:3px solid var(--brand); padding-left:12px; margin-top:0
+}
+.grid{ display:grid; gap:14px }
+.grid.two{ grid-template-columns:repeat(2,1fr) }
+.grid.three{ grid-template-columns:repeat(3,1fr) }
+@media (max-width:800px){
+  .grid.two{ grid-template-columns:1fr }
+  .grid.three{ grid-template-columns:1fr }
+}
+.card{
+  background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08);
+  border-radius:14px; padding:14px
+}
+
+.checklist{ list-style:none; padding:0; margin:.4rem 0 .8rem }
+.checklist li{ padding-left:26px; position:relative; margin:.4rem 0 }
+.checklist li::before{
+  content:"✔"; position:absolute; left:0; top:0; color:var(--brand)
+}
+
+blockquote{
+  margin:.8rem 0; padding:10px 12px; border-left:3px solid var(--ring);
+  background:rgba(255,255,255,.04); border-radius:8px
+}
+
+.pill{
+  display:inline-block; padding:2px 8px; border-radius:999px;
+  border:1px solid rgba(255,255,255,.16); font-size:.85rem
+}
+.pill.ok{ color:var(--ok) } .pill.meh{ color:var(--meh) } .pill.bad{ color:var(--bad) }
+
+code{
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New";
+  background:rgba(255,255,255,.06); padding:.1rem .35rem; border-radius:6px;
+  border:1px solid rgba(255,255,255,.12)
+}
+
+.cta{ display:flex; gap:10px; margin-top:10px; flex-wrap:wrap }
+
+.footer{
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+  padding:16px 0 40px; color:var(--muted);
+  border-top:1px solid rgba(255,255,255,.08)
+}

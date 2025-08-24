@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Why I Built This — Food Logger</title>
+  <link rel="icon" href="data:," />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <a class="skip" href="#content">Skip to content</a>
+
+  <header class="hero">
+    <div class="wrap">
+      <h1>Why I Built This</h1>
+      <p class="subtitle">
+        A lightweight Food &amp; Outcome Logger that trades vibes for evidence.
+      </p>
+      <div class="badges">
+        <span class="badge">Privacy-first</span>
+        <span class="badge">Fast capture</span>
+        <span class="badge">Own your data</span>
+      </div>
+      <a class="btn" href="../app.html">Back to the main App</a>
+    </div>
+  </header>
+
+  <main id="content" class="wrap layout">
+    <aside class="toc" aria-label="Table of contents">
+      <h2>Contents</h2>
+      <ol>
+        <li><a href="#problem">The Problem (no sugar-coating)</a></li>
+        <li><a href="#promise">The Promise</a></li>
+        <li><a href="#principles">Design Principles</a></li>
+        <li><a href="#tech">Technical Choices</a></li>
+        <li><a href="#privacy">Privacy &amp; Ownership</a></li>
+        <li><a href="#non-goals">Non-Goals</a></li>
+        <li><a href="#roadmap">Roadmap</a></li>
+        <li><a href="#personal">My Personal Why</a></li>
+      </ol>
+    </aside>
+
+    <article class="prose">
+      <section class="lede">
+        <p>
+          Most people can’t answer a simple question: <em>“Which meals make me feel good, and which ones mess me up?”</em>
+          Memory is unreliable. Symptoms lag. Advice online is loud but not specific to you. I wanted a tiny tool that
+          connects <strong>what I ate</strong> to <strong>how I felt</strong>—quickly, privately, and without turning meals into homework.
+        </p>
+      </section>
+
+      <section id="problem">
+        <h2>The Problem (no sugar-coating)</h2>
+        <ul class="checklist">
+          <li><strong>Recall is trash.</strong> We remember drama, not patterns.</li>
+          <li><strong>Latency is real.</strong> Evening bloating can be lunch’s fault.</li>
+          <li><strong>Tracking apps are bloated.</strong> Ten taps to log a banana? Hard pass.</li>
+          <li><strong>“Calories = truth” is narrow.</strong> The outcome matters more than the macro math.</li>
+        </ul>
+        <blockquote>
+          If logging takes more than 30 seconds, no one sticks with it. So this app refuses to be heavy.
+        </blockquote>
+      </section>
+
+      <section id="promise">
+        <h2>The Promise</h2>
+        <p>
+          Keep a ruthless, simple log—food, serving size, ingredients, notes, and a blunt outcome:
+          <span class="pill ok">Great</span> / <span class="pill meh">Meh</span> /
+          <span class="pill bad">Not great</span>. In a few weeks you’ll see patterns you can act on.
+        </p>
+        <div class="grid three">
+          <div class="card">
+            <h3>Fast</h3>
+            <p>One form, keyboard shortcut, “Same as last,” ingredients as quick chips.</p>
+          </div>
+          <div class="card">
+            <h3>Portable</h3>
+            <p>Works in any browser. Export JSON/CSV. No vendor lock-in.</p>
+          </div>
+          <div class="card">
+            <h3>Private by default</h3>
+            <p>Local first. Sign in only if you want cross-device sync.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="principles">
+        <h2>Design Principles</h2>
+        <ul>
+          <li><strong>Outcome over obsession.</strong> Track results, not perfection.</li>
+          <li><strong>Friction is the enemy.</strong> Every extra field kills the habit.</li>
+          <li><strong>Clarity beats cleverness.</strong> Simple list. Simple stats. Zero noise.</li>
+          <li><strong>Data is yours.</strong> You can export, import, or delete everything.</li>
+        </ul>
+      </section>
+
+      <section id="tech">
+        <h2>Technical Choices (and why)</h2>
+        <div class="grid two">
+          <div class="card">
+            <h3>Frontend</h3>
+            <p>Vanilla HTML/CSS/JS for reliability and speed. Works offline with LocalStorage.</p>
+          </div>
+          <div class="card">
+            <h3>Sync</h3>
+            <p>Optional Google sign-in + Firestore. Each user writes only to their own
+               <code>users/{uid}/entries</code> via strict security rules.</p>
+          </div>
+          <div class="card">
+            <h3>Hosting</h3>
+            <p>Vercel for simple, fast deploys. No server to babysit.</p>
+          </div>
+          <div class="card">
+            <h3>Portability</h3>
+            <p>Exports in JSON/CSV so you can analyze in your own tools or share with a coach.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="privacy">
+        <h2>Privacy &amp; Ownership</h2>
+        <ul class="checklist">
+          <li>Local by default: your browser stores your log.</li>
+          <li>Opt-in sync with Google: convenient, not required.</li>
+          <li>Export everything. Delete everything. Your call.</li>
+          <li>No third-party trackers. No creepy analytics.</li>
+        </ul>
+      </section>
+
+      <section id="non-goals">
+        <h2>Non-Goals</h2>
+        <div class="grid two">
+          <div class="card">
+            <h3>Diet dogma</h3>
+            <p>No prescriptive meal plans. This is a personal research tool.</p>
+          </div>
+          <div class="card">
+            <h3>Dashboard bloat</h3>
+            <p>No 20-chart circus. You get the stats you’ll actually use.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="roadmap">
+        <h2>Roadmap</h2>
+        <div class="grid three">
+          <div class="card">
+            <h3>Soon</h3>
+            <ul>
+              <li>Ingredient correlation hints</li>
+              <li>Time-lag insights (6–10 hr windows)</li>
+              <li>Better mobile shortcuts</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Later</h3>
+            <ul>
+              <li>Optional wearable overlays (sleep/HRV)</li>
+              <li>Voice logging</li>
+              <li>Clinician share link</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Maybe</h3>
+            <ul>
+              <li>Barcode/packaged-food helpers</li>
+              <li>Multi-user households</li>
+              <li>Privacy-respecting cloud backup</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="personal">
+        <h2>My Personal Why</h2>
+        <p>
+          I write code for a living and I practice awareness off the keyboard. This project merges both:
+          <em>observe reality, then change it.</em> A few honest logs beat a thousand opinions.
+          If a small tool helps someone feel better next week than they did last week, that’s worth building.
+        </p>
+
+  <footer class="footer wrap">
+    <span class="muted">© 2025 • Food Logger</span>
+    <a class="btn ghost" href="#content" aria-label="Back to top">Back to top ↑</a>
+  </footer>
+</body>
+</html>

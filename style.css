@@ -1,0 +1,218 @@
+:root{
+  --bg: #0b0c10;
+  --card:#12151a;
+  --muted:#98a2b3;
+  --text:#e5e7eb;
+  --ok:#22c55e; --meh:#f59e0b; --bad:#ef4444;
+  --ring:#60a5fa;
+}
+@media (prefers-color-scheme: light){
+  :root{ 
+    --bg:#f7f7f8;
+    --card:#ffffff;
+    --text:#0f172a;
+    --muted:#475569; }
+}
+*{box-sizing:border-box}
+html,body{ height:100% }
+body{
+  margin:0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+  background:var(--bg);
+  color:var(--text);
+  line-height: 1.5;
+  text-align: center;
+}
+.container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width:980px;
+  margin:0 auto;
+  padding:20px;
+}
+
+header{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap
+}
+h1{
+  font-size:clamp(1.4rem,2.5vw,2rem);
+  margin:0; letter-spacing:.3px
+}
+.h2{
+  margin:.2rem 0 8px;
+  font-size:1.1rem;
+  font-weight:600;
+  margin: 1rem 0;
+}
+#entry-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin: 1rem auto;
+  max-width: 900px;
+}
+#entry-form input {
+  flex: 1;
+  min-width: 150px;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+#entry-form button {
+  padding: 0.75rem 1.25rem;
+  background: #4CAF50;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+}
+#entry-form button:hover { background: #45a049; }
+
+/* Entries list */
+#entries { list-style: none; padding: 0; margin: 2rem auto; max-width: 900px; }
+#entries li {
+  background: white; padding: 1rem; border-radius: 12px; margin: 0.5rem 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1); text-align: left;
+}
+
+/* 📱 Responsive adjustments */
+@media (max-width: 768px) {
+  #entry-form { flex-direction: column; align-items: stretch; }
+  #entry-form input, #entry-form button { width: 100%; }
+}
+@media (max-width: 480px) {
+  h1 { font-size: 1.5rem; }
+  #entry-form input, #entry-form button { font-size: 0.9rem; padding: 0.6rem; }
+  #entries li { font-size: 0.9rem; padding: 0.75rem; }
+}
+
+.h3{ margin:.2rem 0 .4rem; font-size:1rem; font-weight:600 }
+
+.card{
+  background:var(--card);
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:16px;
+  padding:16px;
+  box-shadow:0 6px 24px rgba(0,0,0,.16);
+  flex: 1 1 300px;
+  margin: 1rem;
+}
+.grid{display:grid; grid-template-columns:1fr; gap:12px}
+@media(min-width:860px){ .grid{ grid-template-columns: 1.1fr .9fr } }
+label{font-size:.85rem; color:var(--muted)}
+
+input[type="text"], input[type="datetime-local"], textarea{
+  width:100%; padding:12px 14px; border-radius:12px;
+  border:1px solid rgba(255,255,255,.1);
+  background:transparent; color:inherit; outline:none;
+}
+input:focus, textarea:focus{
+  border-color:var(--ring);
+  box-shadow:0 0 0 3px rgba(96,165,250,.25)
+}
+textarea{ min-height:88px; resize:vertical }
+.row{ display:flex; gap:10px; align-items:center; flex-wrap:wrap }
+
+.btn{
+  appearance:none; border:none; padding:10px 14px; border-radius:12px;
+  cursor:pointer; background:#1f2937; color:#e5e7eb;
+}
+.btn.primary{ background:#2563eb }
+.btn.ghost{ background:transparent; border:1px dashed rgba(255,255,255,.2); color:var(--muted) }
+.btn.warn{ background:#7f1d1d }
+.btn:disabled{ opacity:.5; cursor:not-allowed }
+
+#app > button { margin: 1rem; padding: 0.75rem 1.25rem; font-size: 1rem; border: none; border-radius: 8px; background: #d9534f; color: white; cursor: pointer; }
+#app > button:hover { background: #c9302c; }
+
+.seg{ display:flex; gap:8px; flex-wrap:wrap }
+.seg input{ display:none }
+.chip{
+  padding:8px 10px; border-radius:999px;
+  border:1px solid rgba(255,255,255,.12);
+  cursor:pointer; user-select:none
+}
+.chip[data-val="great"]{ color:var(--ok); }
+.chip[data-val="meh"]{ color:var(--meh); }
+.chip[data-val="bad"]{ color:var(--bad); }
+.chip.sel{ background: rgba(255,255,255,.06) }
+
+.list{ display:flex; flex-direction:column; gap:10px; margin-top:6px }
+.item{
+  display:grid; grid-template-columns: 1fr auto; gap:10px; align-items:start;
+  background:var(--card); border:1px solid rgba(255,255,255,.08);
+  border-radius:14px; padding:12px
+}
+.item h3{ margin:.2rem 0; font-size:1rem; font-weight:600 }
+.meta{ color:var(--muted); font-size:.85rem }
+.badge{
+  font-size:.75rem; padding:2px 8px; border-radius:999px;
+  border:1px solid rgba(255,255,255,.14)
+}
+.badge.ok{ color:var(--ok); }
+.badge.meh{ color:var(--meh); }
+.badge.bad{ color:var(--bad); }
+
+.actions{ display:flex; gap:8px }
+.muted{ color:var(--muted) }
+.kbd{
+  font: .8rem ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  background:rgba(255,255,255,.06); padding:2px 6px; border-radius:6px;
+  border:1px solid rgba(255,255,255,.12)
+}
+.hr{ height:1px; background:linear-gradient(90deg, transparent, rgba(255,255,255,.12), transparent); margin:10px 0 }
+.table{ width:100%; border-collapse: collapse; font-size:.95rem }
+.table th, .table td{ text-align:left; padding:8px 10px; border-bottom:1px solid rgba(255,255,255,.08) }
+.table input{
+  width:100%; padding:8px 10px; border-radius:8px; border:1px solid rgba(255,255,255,.08);
+  background:transparent; color:inherit; outline:none;
+}
+
+/* Ingredients display in list */
+.tag{
+  display:inline-block; font-size:.8rem; padding:2px 8px; border-radius:999px;
+  border:1px solid rgba(255,255,255,.12); margin-right:6px;
+}
+.ing-line{ margin-top:6px }
+
+/* Screen-reader only */
+.sr{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0 }
+
+/* Ingredients form row */
+.ing-add{ display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin:6px 0 10px }
+
+/* Default (desktop-first) */
+body { font-size: 18px; }
+
+/* Tablets (<= 768px wide) */
+@media (max-width: 768px) {
+  body { font-size: 16px; }
+  .container { flex-direction: column; }
+}
+
+/* Phones (<= 480px wide) */
+@media (max-width: 480px) {
+  body { font-size: 14px; }
+  button { width: 100%; }
+}
+
+.ask-ai-btn {
+  display: inline-block;
+  padding: 10px 18px;
+  background: #22c55e;
+  color: #071b0f;
+  font-weight: 700;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background .2s, transform .1s;
+}
+.ask-ai-btn:hover { background: #16a34a; transform: translateY(-2px); }
+.ask-ai-btn:active { transform: translateY(0); }
